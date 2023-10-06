@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8sp">
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/idLivro"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="ID"
+            app:layout_gravity="fill_horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            app:layout_column="0"
+            app:layout_row="0"
+
+            />
+
+        <TextView
+            android:id="@+id/nomeLivro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TITULO"
+            app:layout_column="2"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            app:layout_row="0" />
+    </androidx.gridlayout.widget.GridLayout>
+</LinearLayout>

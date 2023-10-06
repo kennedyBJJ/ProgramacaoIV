@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Consulta">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:text="Livros Cadastrados" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="480dp" />
+
+    <Button
+        android:id="@+id/btCadastrarLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="CadastrarLivro"
+        android:text="Cadastrar Novamente" />
+
+    <Button
+        android:id="@+id/btVoltar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Voltar"
+        android:text="Voltar" />
+</LinearLayout>

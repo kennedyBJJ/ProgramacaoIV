@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".TelaInicial" >
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="110dp"
+        app:srcCompat="@drawable/livro_icon" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:text="Meus Livros"
+        android:textAlignment="center"
+        android:textSize="20sp" />
+
+    <Button
+        android:id="@+id/btCadastrarLivro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="CadastrarLivro"
+        android:text="Cadastrar Novo Livro" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="verLivro"
+        android:text="Livros Cadastrados" />
+
+    <Button
+        android:id="@+id/btSair"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="sair"
+        android:text="Sair" />
+
+</LinearLayout>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Cadastrar" >
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="Cadastrar novo livro"
+        android:textAlignment="textStart"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/etTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:layout_marginTop="200sp"
+        android:ems="10"
+        android:hint="Título"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etAutor"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:ems="10"
+        android:hint="Autor"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/etEditora"
+        android:layout_width="match_parent"
+        android:layout_height="68dp"
+        android:ems="10"
+        android:hint="Editora"
+        android:inputType="text" />
+
+    <Button
+        android:id="@+id/btnCadastrar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar" />
+
+    <Button
+        android:id="@+id/btLivrosCadastrados"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="Voltar"
+        android:text="Voltar" />
+</LinearLayout>

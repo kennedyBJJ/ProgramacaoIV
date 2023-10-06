@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minHeight="48dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Exemplo Spinner"
+        android:textSize="24dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_medium"
+        android:text="App Exemplo Spinner - Informações sobre a saude. Selecione dentre as opções a seguir"
+        android:textSize="24dp" />
+
+    <Spinner
+        android:id="@+id/spinInformacao"
+        android:layout_width="match_parent"
+        android:layout_height="62dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="330dp"
+        tools:srcCompat="@drawable/ministeriodasaude" />
+</LinearLayout>
