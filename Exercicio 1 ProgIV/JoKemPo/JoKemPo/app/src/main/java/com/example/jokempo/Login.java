@@ -1,15 +1,20 @@
 package com.example.jokempo;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jokempo.pessoa.Pessoa;
 import com.example.jokempo.pessoaDao.PessoaDao;
@@ -20,6 +25,7 @@ public class Login extends AppCompatActivity {
 
     Pessoa jogador;
     PessoaDao pessoaDao;
+    ArrayAdapter<Pessoa> arrayAdapterPessoa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +34,8 @@ public class Login extends AppCompatActivity {
 
         //Botão que vai para a tela de cadastro
         Button buttonCadastro = findViewById(R.id.buttonCadastro);
-
+        //Lista de jogadores
+        ListView listaVisivel = findViewById(R.id.listJogadores);
         buttonCadastro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -38,16 +45,37 @@ public class Login extends AppCompatActivity {
         //Setando evento que vai para a tela de cadastro
         //TO DO
         /*
-        * [] EXIBIR JOGADORES CADASTRADOS NA LISTA
-        *   [] EXIBIR NOME
-        *   [] HORAS JOGADAS
-        *   [] TAXA DE VITORIAS
-        * [] FAZER O LOGIN CLICANDO EM ITENS DA LISTA
+        * [x] EXIBIR JOGADORES CADASTRADOS NA LISTA
+        *   [x] EXIBIR NOME
+        *   [x] HORAS JOGADAS
+        *   [x] TAXA DE VITORIAS
+        * [X] FAZER O LOGIN CLICANDO EM ITENS DA LISTA
         * [] FAZER A OPÇÃO DE DELETAR UM JOGADOR AO CLICAR E SEGURAR
         *
         * */
 
-        //Exibindo jogadores cadastrados na lista
+        listaVisivel.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                jogador = (Pessoa) arrayAdapterPessoa.getItem(position);
+                Intent i = new Intent(Login.this, MainActivity.class);
+                i.putExtra("pessoa-enviada", jogador);
+                startActivity(i);
+
+            }
+        });
+
+        listaVisivel.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
+
+                jogador = arrayAdapterPessoa.getItem(position);
+                alert("TA FUNCIONANDO O LONG CLICK");
+
+                return false;
+            }
+        });
 
 
     }
@@ -70,7 +98,7 @@ public class Login extends AppCompatActivity {
 
         if (listaPessoa != null) {
             // Crie um adaptador personalizado para exibir os dados da Pessoa
-            ArrayAdapter<Pessoa> arrayAdapterPessoa = new ArrayAdapter<Pessoa>(Login.this, R.layout.list_item_layout, R.id.nomeTextView, listaPessoa) {
+            arrayAdapterPessoa = new ArrayAdapter<Pessoa>(Login.this, R.layout.list_item_layout, R.id.nomeTextView, listaPessoa) {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent) {
                     View view = super.getView(position, convertView, parent);
@@ -88,6 +116,10 @@ public class Login extends AppCompatActivity {
 
                         double taxaVitorias = qtdVitorias/qtdPartidas;
 
+                        if(qtdPartidas == 0){
+                            taxaVitorias = 0;
+                        }
+
                         nomeTextView.setText("Nome: " + pessoa.getNome());
                         horasJogadasTextView.setText("Horas Jogadas: " + pessoa.getHorasJogadas());
                         taxaVitoriasTextView.setText("Taxa de Vitórias: " + taxaVitorias + "%");
@@ -101,7 +133,34 @@ public class Login extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
 
+        MenuItem mDelete = menu.add("Excluir Registro");
+        mDelete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
+
+                long retornoDB;
+                pessoaDao = new PessoaDao(Login.this);
+                retornoDB = pessoaDao.excluirPessoa(jogador);
+                pessoaDao.close();
+
+                if(retornoDB == -1){
+                    alert("Erro ao excluir");
+                }else{
+                    alert("Registro excluido com sucesso");
+                }
+
+                populaLista();
+                return false;
+            }
+        });
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+    }
+
+    private void alert(String s){ Toast.makeText(this, s, Toast.LENGTH_SHORT).show(); }
     @Override
     protected void onResume(){
         super.onResume();
