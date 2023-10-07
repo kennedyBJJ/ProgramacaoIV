@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.jokempo.pessoa.Pessoa;
 import com.example.jokempo.pessoaDao.PessoaDao;
@@ -21,7 +23,16 @@ public class FormUsuario extends AppCompatActivity {
         Intent intent = getIntent();
         Pessoa pessoaAlterada = (Pessoa) intent.getSerializableExtra("pessoa-alterada");
         Button buttonAcao = findViewById(R.id.buttonAcao);
+        TextView textViewAcao = findViewById(R.id.textViewAcao);
 
+        if(pessoaAlterada != null){
+            //Significa que existe um jogador e ele deve ser alterado
+            buttonAcao.setText("Alterar");
+            textViewAcao.setText("Altere seu nick");
+        }else{
+            buttonAcao.setText("Cadastrar");
+            textViewAcao.setText("Faça seu cadastro");
+        }
         //Colocar o texto nos botoes e views e chamar as funções quando eles são clicados
         buttonAcao.setOnClickListener(new View.OnClickListener(){
 
@@ -31,18 +42,37 @@ public class FormUsuario extends AppCompatActivity {
                 //se existe uma pessoaAlterada, somente deve alterar
                 if(pessoaAlterada != null){
                     //Significa que existe um jogador e ele deve ser alterado
-                    alterarJogador(pessoaAlterada);
+
+                    if(alterarJogador(pessoaAlterada) == 0 ){
+                        Toast.makeText(FormUsuario.this,"ALTERAÇÃO FALHOU", Toast.LENGTH_SHORT).show();
+                    }else{
+
+                        Toast.makeText(FormUsuario.this,"ALTERAÇÃO REALIZADA", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(FormUsuario.this, Login.class);
+
+                        startActivity(i);
+                    }
                     return;
                 }
+
                 //Significa que não existe jogador e está sendo feito um cadastro
-                cadastrarJogador();
+                //cadastrarJogador retorna -1 se a operação falhar
+                if(cadastrarJogador() == -1){
+                    Toast.makeText(FormUsuario.this,"CADASTRO FALHOU", Toast.LENGTH_SHORT).show();
+                }else{
+
+                    Toast.makeText(FormUsuario.this,"CADASTRO REALIZADO", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(FormUsuario.this, Login.class);
+
+                    startActivity(i);
+                }
 
             }
         });
 
     }
 
-    public void cadastrarJogador(){
+    public long cadastrarJogador(){
 
         EditText editNome = findViewById(R.id.editNome);
 
@@ -57,13 +87,19 @@ public class FormUsuario extends AppCompatActivity {
 
         PessoaDao pessoaDao = new PessoaDao(FormUsuario.this);
 
-        pessoaDao.salvarPessoa(novaPessoa);
+
+
+        long retorno = pessoaDao.salvarPessoa(novaPessoa);
         pessoaDao.close();
+
+        return retorno;
 
     }
 
-    public void alterarJogador(Pessoa pessoaAlterada){
+    public long alterarJogador(Pessoa pessoaAlterada){
         EditText editNome = findViewById(R.id.editNome);
+
+        long retorno;
 
         String nome = editNome.getText().toString();
 
@@ -71,6 +107,10 @@ public class FormUsuario extends AppCompatActivity {
 
         PessoaDao pessoaDao = new PessoaDao(FormUsuario.this);
 
-        pessoaDao.alterarPessoa(pessoaAlterada);
+        retorno = pessoaDao.alterarPessoa(pessoaAlterada);
+
+        //retorno é zero se a operação falhou e não foram atualizados os dados
+        //retorno é maior que zero se a operação atualizou dados
+        return retorno;
     }
 }
