@@ -23,7 +23,16 @@ public class Login extends AppCompatActivity {
         Button buttonCadastro = findViewById(R.id.buttonCadastro);
 
         //Setando evento que vai para a tela de cadastro
-
+        //TO DO
+        /*
+        * [] EXIBIR JOGADORES CADASTRADOS NA LISTA
+        *   [] EXIBIR NOME
+        *   [] HORAS JOGADAS
+        *   [] TAXA DE VITORIAS
+        * [] FAZER O LOGIN CLICANDO EM ITENS DA LISTA
+        * [] FAZER A OPÇÃO DE DELETAR UM JOGADOR AO CLICAR E SEGURAR
+        *
+        * */
 
     }
 

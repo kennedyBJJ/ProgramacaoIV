@@ -18,6 +18,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
+        /*
+        * TO DO:
+        * [] PEGAR O PLAYER
+        * [] A CADA RODADA ATUALIZAR QTD VITORIAS E QTD DE PARTIDAS
+        * */
         //declarando os objetos
         Button buttonTesoura = findViewById(R.id.buttonTesoura);
         Button buttonPapel = findViewById(R.id.buttonPapel);

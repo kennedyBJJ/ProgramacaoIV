@@ -62,9 +62,6 @@ public class PessoaDao extends SQLiteOpenHelper {
         long retornoDB;
 
         values.put(NOME, p.getNome());
-        values.put(VITORIAS, p.getQtdVitorias());
-        values.put(PARTIDAS, p.getQtdPartidas());
-        values.put(TEMPO_JOGO, p.getHorasJogadas());
 
         String[] args = {String.valueOf(p.getId())};
         retornoDB = getWritableDatabase().update(TABELA, values, "id=?",args);
