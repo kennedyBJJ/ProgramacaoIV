@@ -60,7 +60,7 @@ public class Login extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 jogador = (Pessoa) arrayAdapterPessoa.getItem(position);
                 Intent i = new Intent(Login.this, MainActivity.class);
-                i.putExtra("pessoa-enviada", jogador);
+                i.putExtra("jogador-enviado", jogador);
                 startActivity(i);
 
             }

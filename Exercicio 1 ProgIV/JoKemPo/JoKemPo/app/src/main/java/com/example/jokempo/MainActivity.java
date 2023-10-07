@@ -3,31 +3,47 @@ package com.example.jokempo;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.jokempo.pessoa.Pessoa;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    Pessoa jogador;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+        Intent intent = getIntent();
         /*
         * TO DO:
-        * [] PEGAR O PLAYER
+        * [X] PEGAR O PLAYER
         * [] A CADA RODADA ATUALIZAR QTD VITORIAS E QTD DE PARTIDAS
+        * [x] PERMITIR MUDAR O NOME QUANDO CLICAR EM ALTERAR
+        * [] SABER QTD DE HORAS JOGADAS
         * */
+        jogador = (Pessoa) intent.getSerializableExtra("jogador-enviado");
+
+        String nome = jogador.getNome();
+
         //declarando os objetos
         Button buttonTesoura = findViewById(R.id.buttonTesoura);
         Button buttonPapel = findViewById(R.id.buttonPapel);
         Button buttonPedra = findViewById(R.id.buttonPedra);
+        Button buttonAlterar = findViewById(R.id.buttonAlterar); //
+        TextView textViewNome = findViewById(R.id.textViewJogador);
 
+        //define o nome
+        String texto = "Jogador: " + nome;
+        textViewNome.setText(texto);
         buttonTesoura.setOnClickListener(new View.OnClickListener(){
 
             public void onClick(View v){
@@ -49,6 +65,14 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
+        buttonAlterar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(MainActivity.this, FormUsuario.class);
+                i.putExtra("jogador-alterado", jogador);
+                startActivity(i);
+            }
+        });
 
     }
 

@@ -21,7 +21,7 @@ public class FormUsuario extends AppCompatActivity {
         setContentView(R.layout.activity_form_usuario);
 
         Intent intent = getIntent();
-        Pessoa pessoaAlterada = (Pessoa) intent.getSerializableExtra("pessoa-alterada");
+        Pessoa pessoaAlterada = (Pessoa) intent.getSerializableExtra("jogador-alterado");
         Button buttonAcao = findViewById(R.id.buttonAcao);
         TextView textViewAcao = findViewById(R.id.textViewAcao);
 
