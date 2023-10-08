@@ -50,7 +50,7 @@ public class Login extends AppCompatActivity {
         *   [x] HORAS JOGADAS
         *   [x] TAXA DE VITORIAS
         * [X] FAZER O LOGIN CLICANDO EM ITENS DA LISTA
-        * [] FAZER A OPÇÃO DE DELETAR UM JOGADOR AO CLICAR E SEGURAR
+        * [X] FAZER A OPÇÃO DE DELETAR UM JOGADOR AO CLICAR E SEGURAR
         *
         * */
 
@@ -66,12 +66,13 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Não estava aparecendo o menu pois é necessário registra-lo para que ele possa receber um menu
+        registerForContextMenu(listaVisivel);
         listaVisivel.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int position, long id) {
 
                 jogador = arrayAdapterPessoa.getItem(position);
-                alert("TA FUNCIONANDO O LONG CLICK");
 
                 return false;
             }
@@ -136,7 +137,7 @@ public class Login extends AppCompatActivity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
 
-        MenuItem mDelete = menu.add("Excluir Registro");
+        MenuItem mDelete = menu.add("Excluir Jogador");
         mDelete.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(@NonNull MenuItem menuItem) {
@@ -149,7 +150,7 @@ public class Login extends AppCompatActivity {
                 if(retornoDB == -1){
                     alert("Erro ao excluir");
                 }else{
-                    alert("Registro excluido com sucesso");
+                    alert("Jogador excluido com sucesso");
                 }
 
                 populaLista();
