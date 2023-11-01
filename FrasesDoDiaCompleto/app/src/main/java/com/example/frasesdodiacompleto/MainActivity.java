@@ -99,9 +99,9 @@ public class MainActivity extends AppCompatActivity {
         try {
 
             pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0,
-                    intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            
-        }catch (SecurityException e){
+                    intent, PendingIntent.FLAG_MUTABLE);
+            System.out.println();
+        }catch (Exception e){
             textViewResult.setText(e.toString());
         }
         AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
