@@ -1,6 +1,8 @@
-import React, {useState} from 'react'; //importe necessário para usar a biblioteca do react
+//importe necessário para usar a biblioteca do react e estados
+import React, {useState} from 'react';
 
-import {View, Text, TouchableOpacity} from 'react-native'; //Importes dos componentes necessários para criar um código react
+//Importes dos componentes necessários para criar um código react
+import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const frases = [
   'Não ganhe o mundo e perca sua alma; sabedoria é melhor que prata e ouro.',
@@ -23,27 +25,64 @@ const frases = [
   'Hoje estou feliz porque sonhei com você, e amanhã posso chorar por não poder te ver .',
 ];
 
+//criando o componente que forma o aplicativo
 const FrasesDoDiaAPP = () => {
   let indice = Math.floor(Math.random() * frases.length);
+  
+  //para mudar um conteudo dinamicamente pode se usar state (estados)
+  //a sintaxe de estados é
+  //variavel: armazena um valor/dado
+  //função: modifica o valor da variavel 
+  //[<variavel>, <função>]
+
+
+  const mudarFrase = () => {
+    indice = Math.floor(Math.random() * frases.length);
+    setFrase(frases[indice]);
+  }
+
   const [frase, setFrase] = useState(frases[indice]);
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        padding: 5,
-      }}>
+    <View style={styles.container}>
       <Text>{frase}</Text>
-      <TouchableOpacity
-        onPress={() => {
-          indice = Math.floor(Math.random() * frases.length);
-          setFrase(frases[indice]);
-        }}>
-        <Text> Criar Nova Frase</Text>
+      <TouchableOpacity style={styles.button}
+        onPress={mudarFrase}
+        >
+        <Text style={styles.text}> Nova Frase</Text>
       </TouchableOpacity>
     </View>
   );
 };
+
+//estilos
+const styles = StyleSheet.create(
+  {
+    container: 
+    {
+      flex: 1,
+      alignContent: 'center',
+      justifyContent: 'space-evenly',
+      padding: 10,
+      
+    },
+    
+    button:
+    {
+      justifyContent: 'center',
+      minHeight: 50,
+      backgroundColor: 'green',
+      borderRadius: 5,
+      marginLeft: '30%',
+      marginRight: '30%',
+    },
+
+    text:
+    {
+      color: 'white',
+      textAlign: 'center',
+      
+    }
+  }
+)
 
 export default FrasesDoDiaAPP;
