@@ -34,7 +34,7 @@ public class CriaBanco extends SQLiteOpenHelper {
     //Método responsável por atualizar o banco de dados com alguma informação estrutural que tenha sido alterada
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
-        db.execSQL("DEOP TABLE IF EXISTS '" + TABELA +"'");
+        db.execSQL("DROP TABLE IF EXISTS '" + TABELA +"'");
         onCreate(db);
     }
 }
